@@ -1,5 +1,5 @@
 // Given:
-//  1. Weighted, Undirected Graph, with non-negative weights. 
+//  1. Weighted, Undirected Graph, with non-negative weights. (-ve weight leads to infinite cycle, since, the min heap just keeps getting populated by more and more negative distances)
 //  2. Source node
 //
 // Compute: 
