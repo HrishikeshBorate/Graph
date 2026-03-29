@@ -1,9 +1,19 @@
 // Given:
-//  1. Weighted, Undirected Graph, with non-negative weights. (-ve weight leads to infinite cycle, since, the min heap just keeps getting populated by more and more negative distances)
-//  2. Source node
+//  1. Non-negative weighted graph (-ve weight leads to infinite cycle, since, the min heap just keeps getting populated by more and more negative distances)
+//  2. Undirected Graph (Algo can work with directed graphs)
+//  3. Source node
 //
 // Compute: 
 //  1. Shortest distance to all nodes from the source node
+// 
+// Time Complexity: O(E log(V))
+// 1. Across the whole algorithm:
+//   a. every edge is explored
+//   b. for an undirected graph, each edge appears twice in adjacency list
+//   So total neighbor processing is: O(E)
+// 2. Priority queue operations cost: log(V)
+// 
+// Space Complexit: O(V + E)
 
 class Solution {
   private:
@@ -55,6 +65,9 @@ class Solution {
                 // If going from source → current node → adjacent node <
                 // current shortest dist from source → adjacent node,
                 // then update it.
+
+                // This step is called relaxation:
+                // if(dist[u] + cost(u,v) < dist[v]) dist[v] = dist[u] + cost(u,v);
                 if (curDist + edgeDist < dist[adjNode]) {
                     dist[adjNode] = curDist + edgeDist;
                     pq.push({dist[adjNode], adjNode});
